@@ -2,6 +2,12 @@
 
 Viewing conditions and visible objects forecast API
 
+The aim is to have a single service that provides information regarding good astronomy targets on a given night, based on target position and weather conditions in the area.
+
+The first goal is to create a functional API, which will later be supplemented with a simple React frontend and daily email notification service.
+
+Behind the scenes, the purpose is to practice TDD and general project management skills within a React/Django/Python stack.
+
 ## RoadMap
 
 ### Phase 1
