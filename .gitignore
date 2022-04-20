@@ -1,2 +1,3 @@
 # virtual environment
 server/venv
+server/ap_backend/__pycache__
