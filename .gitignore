@@ -1,3 +1,4 @@
 # virtual environment
-server/venv
-server/ap_backend/__pycache__
+venv/*
+server/main/__pycache__/*
+
