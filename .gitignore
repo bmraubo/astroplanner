@@ -1,2 +1,4 @@
 # virtual environment
-server/venv
+venv/*
+server/main/__pycache__/*
+
