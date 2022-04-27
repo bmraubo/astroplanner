@@ -1,4 +1,4 @@
 # virtual environment
-venv/*
-server/main/__pycache__/*
+astroplanner_venv/*
+**/__pycache__/*
 
