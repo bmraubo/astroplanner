@@ -22,10 +22,27 @@ class TestWeatherService(TestCase):
 
         self.assertTrue(type(relevant_data) == dict)
         self.assertTrue("clouds" in relevant_data["current"].keys())
-        self.assertTrue("visibility" in relevant_data["current"].keys())
         self.assertTrue("temp" in relevant_data["current"].keys())
-        self.assertTrue("sunset" in relevant_data["current"].keys())
-        self.assertTrue("dew_point" in relevant_data["current"].keys())
+        self.assertTrue("weather" in relevant_data["current"].keys())
+
+    def test_weather_service_can_extract_nighttime_relevant_data(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        self.assertTrue("tonight" in relevant_data.keys())
+
+    def test_weather_service_can_extract_correct_sunrise_and_sunset(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        self.assertTrue("sunset" in relevant_data["tonight"].keys())
+        self.assertTrue("sunrise" in relevant_data["tonight"].keys())
+        self.assertTrue(relevant_data["tonight"]["sunrise"] > relevant_data["tonight"]["sunset"])
+
+    def test_weather_service_can_extract_correct_moonrise_and_moonset(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        self.assertTrue("moonrise" in relevant_data["tonight"].keys())
+        self.assertTrue("moonset" in relevant_data["tonight"].keys())
+        self.assertTrue(relevant_data["tonight"]["moonset"] > relevant_data["tonight"]["moonrise"])
 
     def test_weather_service_can_convert_timestamp_to_date_time_format(self):
         timestamp = 1618315200
@@ -35,10 +52,10 @@ class TestWeatherService(TestCase):
 
         self.assertEqual(date_time, expected_date_time)
     
-    def test_relevant_data_timestamps_have_been_converted(self):
-        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+    # def test_relevant_data_timestamps_have_been_converted(self):
+    #     relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
 
-        self.assertTrue("/" and ":" in relevant_data["current"]["sunset"])
+    #     self.assertTrue("/" and ":" in relevant_data["current"]["sunset"])
 
 
     
