@@ -29,6 +29,28 @@ class TestWeatherService(TestCase):
         relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
 
         self.assertTrue("tonight" in relevant_data.keys())
+        self.assertTrue("hourly" in relevant_data["tonight"].keys())
+
+    def test_weather_service_can_extract_correct_information_from_hourly_weather_data(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        self.assertTrue("dt" in relevant_data["tonight"]["hourly"][0])
+        self.assertTrue("temp" in relevant_data["tonight"]["hourly"][0])
+        self.assertTrue("clouds" in relevant_data["tonight"]["hourly"][0])
+        self.assertTrue("dew_point" in relevant_data["tonight"]["hourly"][0])
+        self.assertTrue("wind_speed" in relevant_data["tonight"]["hourly"][0])
+        self.assertTrue("precipitation_chance" in relevant_data["tonight"]["hourly"][0])
+
+    def test_weather_service_can_extract_hourly_relevant_data_between_sunset_and_sunrise(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        first_hour_timestamp = relevant_data["tonight"]["hourly"][0]["dt"]
+        last_hour_timestamp = relevant_data["tonight"]["hourly"][-1]["dt"]
+        sunset = relevant_data["tonight"]["sunset"]
+        sunrise = relevant_data["tonight"]["sunrise"]
+        self.assertTrue(first_hour_timestamp > sunset)
+        self.assertTrue(last_hour_timestamp < sunrise)
+
 
     def test_weather_service_can_extract_correct_sunrise_and_sunset(self):
         relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
