@@ -3,7 +3,7 @@ import requests
 
 class WeatherService:
     base_url = "https://api.openweathermap.org/data/2.5/onecall"
-    relevant_data_categories = ["clouds", "visibility", "temp"]
+    relevant_data_categories = ["clouds", "visibility", "temp", "sunset", "dew_point"]
 
     def __init__(self, location):
         self.location = location

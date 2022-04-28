@@ -14,7 +14,7 @@ class TestWeatherService(TestCase):
         self.assertTrue("lon" in weather_data.keys())
         self.assertEqual(weather_data["lon"], location["lon"])
 
-    def test_weather_service_can_extract_cloud_cover_data(self):
+    def test_weather_service_can_extract_current_relevant_data(self):
         location = {"lat": 10.00, "lon": 20.00}
         weather_service = WeatherService(location)
         weather_data = weather_service.fetch_weather_data()
@@ -22,3 +22,7 @@ class TestWeatherService(TestCase):
         self.assertTrue("clouds" in relevant_data["current"].keys())
         self.assertTrue("visibility" in relevant_data["current"].keys())
         self.assertTrue("temp" in relevant_data["current"].keys())
+        self.assertTrue("sunset" in relevant_data["current"].keys())
+        self.assertTrue("dew_point" in relevant_data["current"].keys())
+
+    
