@@ -19,6 +19,7 @@ class TestWeatherService(TestCase):
 
     def test_weather_service_can_extract_current_relevant_data(self):
         relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
         self.assertTrue(type(relevant_data) == dict)
         self.assertTrue("clouds" in relevant_data["current"].keys())
         self.assertTrue("visibility" in relevant_data["current"].keys())
@@ -26,7 +27,18 @@ class TestWeatherService(TestCase):
         self.assertTrue("sunset" in relevant_data["current"].keys())
         self.assertTrue("dew_point" in relevant_data["current"].keys())
 
-    def test_weather_service_can_convert_timestamp_to_HH_MM_format(self):
-        pass
+    def test_weather_service_can_convert_timestamp_to_date_time_format(self):
+        timestamp = 1618315200
+        expected_date_time = "13/04/2021 12:00"
+        
+        date_time = self.weather_service._convert_time_format(timestamp)
+
+        self.assertEqual(date_time, expected_date_time)
+    
+    def test_relevant_data_timestamps_have_been_converted(self):
+        relevant_data = self.weather_service.extract_relevant_data(self.weather_data)
+
+        self.assertTrue("/" and ":" in relevant_data["current"]["sunset"])
+
 
     
