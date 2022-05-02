@@ -28,6 +28,8 @@ poetry-core==1.0.7
 ptyprocess==0.7.0
 pylev==1.4.0
 pyparsing==3.0.6
+python-dotenv==0.20.0
+regex==2022.4.24
 requests==2.27.1
 requests-toolbelt==0.9.1
 shellingham==1.4.0

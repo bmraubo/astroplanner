@@ -1,3 +1,6 @@
+from dotenv import load_dotenv, find_dotenv
+from os import environ
+
 """
 Django settings for ap_backend project.
 
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'weather_service'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
+# ENV VARIABLES
+load_dotenv(find_dotenv())
+OPEN_WEATHER_API_KEY=environ.get("OPEN_WEATHER_API_KEY")
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
